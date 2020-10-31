@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 order-1 order-lg-0">
-                                    <div class="d-flex align-items-center justify-content-center"> <img src="{{$block->img}}" style="max-width: 120%;"></div>
+                                    <div class="d-flex align-items-center justify-content-center"> <img src="{{asset('storage/'.$block->img)}}" style="max-width: 120%;"></div>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 order-0 order-lg-1 order-1 order-lg-0">
-                                    <div class="d-flex align-items-center justify-content-center"> <img src="{{$block->img}}" style="max-width: 120%;"></div>
+                                    <div class="d-flex align-items-center justify-content-center"> <img src="{{asset('storage/'.$block->img)}}" style="max-width: 120%;"></div>
                                 </div>
                             </div>
                         </div>
