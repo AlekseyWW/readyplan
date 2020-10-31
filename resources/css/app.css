@@ -774,7 +774,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      /* background-image: url('/images/desktop.png'); */
+      background-image: url('/storage/blocks/desktop.png');
       background-size: cover;
       pointer-events: none;
   }
@@ -810,10 +810,10 @@
       background-position: center;
   }
   .case-scroll-block__hover::after {
-      /* background-image: url('/images/bottom.svg'); */
+      background-image: url('/storage/blocks/bottom.svg');
   }
   .case-scroll-block__hover::before {
-      /* background-image: url('/images/top.svg'); */
+      background-image: url('/storage/blocks/top.svg');
   }
     
   .case-scroll-block____inner {
@@ -858,7 +858,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      /* background-image: url('/images/phone.png'); */
+      background-image: url('/storage/blocks/phone.png');
       background-size: cover;
       pointer-events: none;
   }
@@ -886,7 +886,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      /* background-image: url('/images/laptop.png'); */
+      background-image: url('/storage/blocks/laptop.png');
       background-size: cover;
       pointer-events: none;
   }
