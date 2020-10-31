@@ -722,7 +722,7 @@
   }
   
   .top-slider__image {
-      /* background-image: url('../images/slide_bg.png'); */
+      background-image: url('/storage/blocks/slide_bg.png');
       background-size: contain;
       background-position: 100% center;
       background-repeat: no-repeat;
