@@ -19,7 +19,7 @@
             <div class="mb-5 d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                     <a href="index.html" class="logo">
-                        <img src="./images/logo.png" alt="">
+                        <img src="{{setting('site.logo')}}" alt="">
                     </a>
                 </div>
                 <div class="offcanvas-close"> <svg xmlns="http://www.w3.org/2000/svg" width="17.678" height="17.678"
@@ -129,7 +129,7 @@
                                                     <div class="case-scroll-block__wrapper">
                                                         <!-- <div class="case-scroll-block__hover">Наведите курсор мыши</div> -->
                                                         <div class="case-scroll-block__inner">
-                                                            <img src="{{$item->img}}" alt="">
+                                                            <img src="{{asset($item->img)}}" alt="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -150,7 +150,7 @@
                     @break
 
                 @case('first')
-                    <section class="section" style="background-image: url('blocks/bg_1.png');">
+                    <section class="section" style="background-image: url('{{asset('blocks/bg_1.png')}}');">
                         <div class="container">
                             <div class="col-md-10 section-title">
                                 <h2 class="text-center">{{$block->title}}</h2>
@@ -161,7 +161,7 @@
                                     @foreach ($block->children as $item)
                                         <div class="p-2 col-lg-4 text-center">
                                             <div class="mb-3">
-                                                <img src="{{$item->img}}" alt="">
+                                                <img src="{{asset($item->img)}}" alt="">
                                             </div>
                                             <h4>{{$item->title}}</h4>
                                             <p class="text">{!!$item->caption!!}</p>
@@ -185,7 +185,7 @@
                                         @foreach ($block->children as $item)
                                             <div class="d-flex flex-sm-row flex-column align-items-start">
                                                 <div class="rounded bg-white service-icon mb-4 mb-sm-0">
-                                                    <img src="{{$item->img}}" alt="">
+                                                    <img src="{{asset($item->img)}}" alt="">
                                                 </div>
                                                 <div class="pl-0 pl-sm-4">
                                                     <h5 class="text-purple">{{$item->title}}</h5>
@@ -220,7 +220,7 @@
                     </section>
                     @break
                 @case('right')
-                    <section class="section" style="background-image: url('blocks/bg.png');">
+                    <section class="section" style="background-image: url({{asset('blocks/bg.png')}});">
                         <div class="container">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-lg-6 order-1 order-lg-0  order-0 order-lg-1 pl-5 pr-5">
@@ -258,7 +258,7 @@
 
                                                 <li class="d-flex mb-5">
                                                     <div class="mr-5">
-                                                        <img src="{{$item->img}}" class="wow fadeInUp10"
+                                                        <img src="{{asset($item->img)}}" class="wow fadeInUp10"
                                                             data-wow-duration="1s" data-rjs="2" alt=""
                                                             style="visibility: visible; animation-duration: 1s; animation-name: fadeInUp10;">
                                                     </div>
@@ -277,7 +277,7 @@
                     @break
 
                 @case('subscribe')
-                    <section class="section" style="background-image: url('block/images/bg_1.png');">
+                    <section class="section" style="background-image: url('{{asset('blocks/bg_1.png')}}');">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-10 text-center">
@@ -314,7 +314,7 @@
                             <div class="row">
                                 @foreach ($block->children as $item)
                                     <div class="col pr-4 pl-4 text-center">
-                                        <img src="{{$item->img}}" data-rjs="2" alt=""> 
+                                        <img src="{{asset($item->img)}}" data-rjs="2" alt=""> 
                                     </div>
                                 @endforeach
                             </div>
@@ -336,7 +336,7 @@
                                 @foreach ($block->children as $item)
                                     <div class="col-lg-3 col-md-6 mb-md-100">
                                         <div class="card text-center">
-                                            <div class="mb-4 bg-white align-self-center p-4 rounded"> <img src="{{$item->img}}" data-rjs="2" alt=""></div>
+                                            <div class="mb-4 bg-white align-self-center p-4 rounded"> <img src="{{asset($item->img)}}" data-rjs="2" alt=""></div>
                                             <div class="feature-content">
                                                 <h3>{!!$item->title!!}</h3>
                                                 {!!$item->caption!!}
@@ -368,7 +368,7 @@
                                             <div type="button" class="accordion-item" data-toggle="collapse" data-target="#collapse_{{$item->id}}" aria-expanded="false" aria-controls="collapse_{{$item->id}}">
                                                 <div class="accordion-header" id="headingOne">
                                                     <h3 class="mb-0">
-                                                        <img src="blocks/what.png" data-rjs="2" alt="" class="accordion-whatsign">
+                                                        <img src="{{asset('blocks/what.png')}}" data-rjs="2" alt="" class="accordion-whatsign">
                                                         {!!$item->title!!}
                                                     </h3>
                                                 </div>
@@ -383,7 +383,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-5 pt-5 pb-5">
-                                    <div class="accordion-right"> <img src="{{$block->img}}" alt=""></div>
+                                    <div class="accordion-right"> <img src="{{asset($block->img)}}" alt=""></div>
                                 </div>
                             </div>
                         </div>
