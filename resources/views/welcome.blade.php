@@ -19,7 +19,7 @@
             <div class="mb-5 d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                     <a href="index.html" class="logo">
-                        <img src="{{setting('site.logo')}}" alt="">
+                        <img src="{{asset('storage/'.setting('site.logo'))}}" alt="">
                     </a>
                 </div>
                 <div class="offcanvas-close"> <svg xmlns="http://www.w3.org/2000/svg" width="17.678" height="17.678"
@@ -64,7 +64,7 @@
         <nav class="nav navbar navbar-expand-lg">
             <div class="container align-self-stretch align-items-stretch">
                 <a class="navbar-brand align-self-center" href="#">
-                 <img src="{{setting('site.logo')}}" alt=""> 
+                 <img src="{{asset('storage/'.setting('site.logo'))}}" alt=""> 
                 </a>
                 <div id="menu-button" class="d-lg-none d-inline-block align-self-center"> <span></span></div>
                 <ul class="d-none d-lg-flex nav__list navbar-nav navbar-nav">
@@ -249,7 +249,7 @@
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-lg-5 col-md-12 mb-md-0 mb-5">
-                                    <img src="{!!$block->img!!}" data-rjs="2" alt="">
+                                    <img src="{{asset('storage/'.$block->img)}}" data-rjs="2" alt="">
                                 </div>
                                 <div class="col-lg-6 col-md-12">
                                     <div class="pl-120">
@@ -432,7 +432,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 col-md-5 col-12">
                                     <div class="widget widget_text">
-                                        <img src="{{setting('site.logo')}}" class="mb-4" alt="">
+                                        <img src="{{asset('storage/'.setting('site.logo'))}}" class="mb-4" alt="">
                                         <p class="mb-4">Далеко-далеко за словесными горами в стране гласных и согласных живут.</p>
                                         <div class="d-flex socials">
                                             <a class="bg-purple rounded-circle text-white" href="#" target="_blank">
