@@ -895,4 +895,8 @@
       opacity: 0;
       pointer-events: none;
   }
+
+  .widget img {
+      max-width: 220px;
+  }
   

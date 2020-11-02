@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{setting('site.title')}}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/app.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -36,27 +35,11 @@
                 </div>
             </div>
             <ul class="nav flex-column align-items-start">
-                <li class="nav__item nav-item">
-                    <a href="#" class="nav__link nav-link">Система управления</a>
-                </li>
-                <li class="nav__item nav-item">
-                    <a href="#" class="nav__link nav-link">Функционал</a>
-                </li>
-                <li class="nav__item nav-item">
-                    <a href="#" class="nav__link nav-link">Преимущества</a>
-                </li>
-                <li class="nav__item nav-item">
-                    <a href="#" class="nav__link nav-link">Внедрение</a>
-                </li>
-                <li class="nav__item nav-item">
-                    <a href="#" class="nav__link nav-link">Для кого?</a>
-                </li>
-                <li class="nav__item nav-item">
-                    <a href="#" class="nav__link nav-link">Стоимость</a>
-                </li>
-                <li class="nav__item nav-item">
-                    <a href="#" class="nav__link nav-link">Контакты</a>
-                </li>
+                @foreach ($nav as $nav_item)
+                    <li class="nav__item nav-item">
+                        <a href="#" class="nav__link nav-link" data-target="#block_{{$nav_item->block_id}}">{{$nav_item->name}}</a>
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -68,27 +51,12 @@
                 </a>
                 <div id="menu-button" class="d-lg-none d-inline-block align-self-center"> <span></span></div>
                 <ul class="d-none d-lg-flex nav__list navbar-nav navbar-nav">
-                    <li class="nav__item nav-item">
-                        <a href="#" class="nav__link nav-link">Система управления</a>
-                    </li>
-                    <li class="nav__item nav-item">
-                        <a href="#" class="nav__link nav-link">Функционал</a>
-                    </li>
-                    <li class="nav__item nav-item">
-                        <a href="#" class="nav__link nav-link">Преимущества</a>
-                    </li>
-                    <li class="nav__item nav-item">
-                        <a href="#" class="nav__link nav-link">Внедрение</a>
-                    </li>
-                    <li class="nav__item nav-item">
-                        <a href="#" class="nav__link nav-link">Для кого?</a>
-                    </li>
-                    <li class="nav__item nav-item">
-                        <a href="#" class="nav__link nav-link">Стоимость</a>
-                    </li>
-                    <li class="nav__item nav-item">
-                        <a href="#" class="nav__link nav-link">Контакты</a>
-                    </li>
+                    @foreach ($nav as $nav_item)
+                        <li class="nav__item nav-item">
+                            <a href="#" class="nav__link nav-link" data-target="#block_{{$nav_item->block_id}}">{{$nav_item->name}}</a>
+                        </li>
+                    @endforeach
+                    
                 </ul>
             </div>
         </nav>
@@ -98,7 +66,7 @@
         @foreach ($blocks as $block)
             @switch($block->type)
                 @case('slider')
-                    <section class="section">
+                    <section id="block_{{$block->id}}" class="section">
                         <div class="container collections">
                             <div class="row top-slider" >
                                 <div class="col-md-6 col-xl-5  align-self-stretch">
@@ -108,11 +76,16 @@
                                             <div class="top-slider__content">
                                                 <h1 class="top-slider__title mb-5">{!!$item->title!!}</h1>
                                                 <div class="top-slider__text mb-5" >{!!$item->caption!!}</div>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Введите ваш Email"
-                                                        aria-label="Recipient's username" aria-describedby="button-addon2">
-                                                    <button class="btn btn-info" type="button" id="button-addon2">Попробовать</button>
-                                                </div>
+                                                <form action="{{route('contact.store')}}"
+                                                    data-subject="Попробовать"
+                                                    method="POST"
+                                                    class="web-form">
+                                                    @csrf
+                                                    <div class="input-group">
+                                                        <input type="email" name="email" class="form-control" placeholder="Введите ваш Email" required>
+                                                        <button class="btn btn-info" id="button-addon2">Попробовать</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         @endforeach
                                     </div>
@@ -150,7 +123,7 @@
                     @break
 
                 @case('first')
-                    <section class="section" style="background-image: url('{{asset('storage/blocks/bg_1.png')}}');">
+                    <section id="block_{{$block->id}}" class="section" style="background-image: url('{{asset('storage/blocks/bg_1.png')}}');">
                         <div class="container">
                             <div class="col-md-10 section-title">
                                 <h2 class="text-center">{{$block->title}}</h2>
@@ -174,7 +147,7 @@
                     @break
             
                 @case('second')
-                    <section class="section bg-blue">
+                    <section id="block_{{$block->id}}" class="section bg-blue">
                         <div class="container">
                             <div class="section-title">
                                 <h2 class="text-center">{{$block->title}}</h2>
@@ -203,7 +176,7 @@
                     @break
             
                 @case('left')
-                    <section class="section">
+                    <section  id="block_{{$block->id}}" class="section">
                         <div class="container">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-lg-6 order-0 order-lg-1 pl-5 pr-5">
@@ -220,7 +193,7 @@
                     </section>
                     @break
                 @case('right')
-                    <section class="section" style="background-image: url({{asset('storage/blocks/bg.png')}});">
+                    <section id="block_{{$block->id}}" class="section" style="background-image: url({{asset('storage/blocks/bg.png')}});">
                         <div class="container">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-lg-6 order-1 order-lg-0  order-0 order-lg-1 pl-5 pr-5">
@@ -238,7 +211,7 @@
                     @break
 
                 @case('tech')
-                    <section class="section" >
+                    <section id="block_{{$block->id}}" class="section" >
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 text-center">
@@ -277,7 +250,7 @@
                     @break
 
                 @case('subscribe')
-                    <section class="section" style="background-image: url('{{asset('storage/blocks/bg_1.png')}}');">
+                    <section id="block_{{$block->id}}" class="section" style="background-image: url('{{asset('storage/blocks/bg_1.png')}}');">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-10 text-center">
@@ -285,12 +258,14 @@
                                         <h2 class="black">{!!$block->title!!}</h2>
                                         <p class="mb-50">{!!$block->caption!!}</p>
                                         <form
-                                            action="https://themelooks.us13.list-manage.com/subscribe/post?u=79f0b132ec25ee223bb41835f&amp;id=f4e0e93d1d"
-                                            class="newslatter-form">
+                                            action="{{route('contact.store')}}"
+                                            method="POST"
+                                            data-subject="Подписка"
+                                            class="web-form">
+                                            @csrf
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Введите ваш Email" aria-label="Recipient's username"
-                                                    aria-describedby="button-addon2">
-                                                <button class="btn btn-info" type="button" id="button-addon2">Попробовать</button>
+                                                <input name="email" type="text" class="form-control" placeholder="Введите ваш Email"  required>
+                                                <button class="btn btn-info"  id="button-addon2">Попробовать</button>
                                             </div>
                                         </form>
                                     </div>
@@ -301,7 +276,7 @@
                     @break
 
                 @case('integration')
-                    <section class="section">
+                    <section id="block_{{$block->id}}" class="section">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8 text-center m-auto">
@@ -323,7 +298,7 @@
                     @break
 
                 @case('for')
-                    <section class="section">
+                    <section id="block_{{$block->id}}" class="section">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 text-center">
@@ -350,7 +325,7 @@
                     @break
 
                 @case('faq')
-                    <section class="section">
+                    <section id="block_{{$block->id}}" class="section">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12">
@@ -391,7 +366,7 @@
                     @break
 
                 @case('footer')
-                    <footer class="section bg-orange pb-0">
+                    <footer id="block_{{$block->id}}" class="section bg-orange pb-0">
                         <div class="container mb-5">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-lg-7 col-md-12 mb-md-60">
@@ -403,91 +378,50 @@
                                 <div class="col-lg-5 col-md-12">
                                     <div class="footer-bottom-right">
                                         <form
-                                            action="https://themelooks.us13.list-manage.com/subscribe/post?u=79f0b132ec25ee223bb41835f&amp;id=f4e0e93d1d"
-                                            class="newslatter-form">
+                                            action="{{route('contact.store')}}"
+                                            method="POST"
+                                            data-subject="Узнать больше"
+                                            class="web-form">
+                                            @csrf
                                             <div class="d-flex flex-column">
                                                 <div class="d-flex mb-4">
-                                                    <input class="form-control mr-4" type="text" name="name" placeholder="Имя">
+                                                    <input class="form-control mr-4" type="text" name="name" placeholder="Имя" required>
                                                     <input class="form-control" type="text" name="phone" placeholder="Телефон">
                                                 </div>
                                                 <div class="d-flex mb-4">
-                                                    <input class="form-control mr-4" type="email" name="email" placeholder="Почта">
+                                                    <input class="form-control mr-4" type="email" name="email" placeholder="Почта" required>
                                                     <input class="form-control" type="text" name="position" placeholder="Должность">
                                                 </div>
                                                 <input class="form-control mb-4" type="text" name="company" placeholder="Компания">
                                                 <button type="submit" class="btn btn-warning text-white">Отправить</button>
                                             </div>
                                             <div class="form-check pt-4">
-                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                                    Далеко-далеко за словесными, горами в стране гласных и согласных.
-                                                </label>
+                                                <span class="form-check-label">
+                                                    Нажимая на кнопку "Отправить", Вы даете согласие на обработку персональных данных
+                                                </span>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @foreach ($block->children as $item)
                         <div class="container bg-white p-sm-5 pt-5 pb-5">
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-between">
                                 <div class="col-lg-4 col-md-5 col-12">
                                     <div class="widget widget_text">
                                         <img src="{{asset('storage/'.setting('site.logo'))}}" class="mb-4" alt="">
-                                        <p class="mb-4">Далеко-далеко за словесными горами в стране гласных и согласных живут.</p>
-                                        <div class="d-flex socials">
-                                            <a class="bg-purple rounded-circle text-white" href="#" target="_blank">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                            <a class="bg-purple rounded-circle text-white" href="#" target="_blank">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                            <a class="bg-purple rounded-circle text-white" href="#" target="_blank">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
-                                            <a class="bg-purple rounded-circle text-white" href="#" target="_blank">
-                                                <i class="fa fa-linkedin"></i>
-                                            </a>
-                                        </div>
+                                        <p class="mb-4">{!!$item->title!!}</p>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-md-5 col-10">
-                                    <div class="mb-4">
-                                        <h4 class="text-purple">Features</h4>
-                                    </div>
-                                    <ul class="list-unstyled">
-                                        <li><a class="link-dark" href="#">Timeline Review</a></li>
-                                        <li><a class="link-dark" href="#">Custom fields</a></li>
-                                        <li><a class="link-dark" href="#">Custom Templates</a></li>
-                                        <li><a class="link-dark" href="#">Task dependencies</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-2 col-md-5 col-10">
-                                    <div class="mb-4">
-                                        <h4 class="text-purple">Company</h4>
-                                    </div>
-                                    <ul class="list-unstyled">
-                                        <li><a class="link-dark" href="#">about us</a></li>
-                                        <li><a class="link-dark" href="#">pricing plan</a></li>
-                                        <li><a class="link-dark" href="#">Privacy &amp; Policy</a></li>
-                                        <li><a class="link-dark" href="#">latest news</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-2 col-md-5 col-10">
-                                    <div class="mb-4">
-                                        <h4 class="text-purple">Customers</h4>
-                                    </div>
-                                    <ul class="list-unstyled">
-                                        <li><a class="link-dark" href="#">login</a></li>
-                                        <li><a class="link-dark" href="#">support</a></li>
-                                        <li><a class="link-dark" href="#">help center</a></li>
-                                    </ul>
-                                </div>
+                                {!! $item->caption !!}
                             </div>
                         </div>
+                        @endforeach
                         <div class="container pt-4 pb-4">
                             <div class="row">
                                 <div class="col-lg-12 text-center">
-                                    <div class="copyright-text style--two"> © 2019 By <a href="https://www.themelooks.com/">Themelooks</a>. All
+                                    <div class="copyright-text style--two"> © 2020 By ReadyPlan. All
                                         Rights Reserved</div>
                                 </div>
                             </div>
@@ -499,21 +433,26 @@
                     Default case...
             @endswitch
         @endforeach
-
-
+        
+        <div class="toast toast_success  d-flex align-items-center text-white bg-danger border-0" style="position: fixed; top: 0; right: 0; z-index: 100; margin: 16px;" role="alert" aria-live="polite" aria-atomic="true" data-delay="5000">
+            <div class="toast-body">
+              
+            </div>
+            <button type="button" class="btn-close btn-close-white ml-auto mr-2" data-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast toast_error d-flex align-items-center text-white bg-success border-0" style="position: fixed; top: 0; right: 0; z-index: 100; margin: 16px;" role="alert" aria-live="polite" aria-atomic="true" data-delay="5000">
+            <div class="toast-body">
+              
+            </div>
+            <button type="button" class="btn-close btn-close-white ml-auto mr-2" data-dismiss="toast" aria-label="Close"></button>
+        </div>
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js" integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="./js/app.js"></script>
+
 </body>
 
 </html> 

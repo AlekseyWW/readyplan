@@ -13,4 +13,9 @@ class Block extends Model
     {
         return $this->hasMany($this, 'parent_id');
     }
+
+    public function scopeParent($query)
+    {
+        return $query->where('parent_id', null);
+    }
 }

@@ -1,12 +1,8 @@
 require('./bootstrap');
+require('./form');
 // if you're using a bundler, first import:
 const Headroom = require("headroom.js");
 
-console.log('!!!!!!!!!!!!!');
-console.log('!!!!!!!!!!!!!');
-console.log('!!!!!!!!!!!!!');
-console.log('!!!!!!!!!!!!!');
-console.log('!!!!!!!!!!!!!');
 const header = document.querySelector('header');
 const headroom = new Headroom(header);
 // initialise
@@ -17,6 +13,7 @@ const menuButton = document.querySelector('#menu-button');
 const closeBtn = document.querySelector('.offcanvas-close');
 const overlay = document.querySelector('.offcanvas-overlay');
 const menu = document.querySelector('#mobile_menu');
+const navs = document.querySelectorAll('.nav-link');
 
 const contents = document.querySelectorAll('.top-slider__content');
 
@@ -57,3 +54,16 @@ mySwiper.on('slideChange', onSlideChange);
 
 menuButton.addEventListener('click', toggleMenu)
 closeBtn.addEventListener('click', toggleMenu)
+
+
+navs.forEach(nav => {
+    const linkTo = nav.dataset.target;
+    const block = document.querySelector(linkTo);
+    console.log({block});
+    if (block) {
+        nav.addEventListener('click', e => {
+            e.preventDefault();
+            block.scrollIntoView({top: 100, behavior: "smooth"});
+        })
+    }
+});
