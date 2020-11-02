@@ -1,21 +1,42 @@
-<div class="panel-content row">
-    @foreach ($blocks as $data)
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item active d-flex justify-content-between align-items-center">
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Настройки сайта</h3>
+            </div>
+            <div class="panel-body" style="padding-top: 20px;">
+                <h3>
+                    <img style="max-width: 200px" src="/storage/{{setting('site.logo')}}" alt="">
+                </h3>
+                <h3><small>Название:</small><br><b>{{setting('site.title')}}</b></h3>
+                <p><small>Описание:</small><br><b>{{setting('site.description')}}<b></p>
+                <p><small>Телефон:</small><br><b>{{setting('site.phone')}}<b></p>
+                <p><small>Почта:</small><br><b>{{setting('site.email')}}<b></p>
+            </div>
+            <div class="panel-footer clearfix">
+                <a href="{{route('voyager.settings.index')}}" class="btn btn-primary btn-lg">Изменить</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        @foreach ($blocks as $data)
+            <div class="list-group">
+                <div class="list-group-item d-flex justify-content-between align-items-center">
                         
-                    <span>
-                        {!!$data->title!!}
-                        @isset ($data->children[0])
-                            <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#collapse-{{$data->id}}" aria-expanded="false" aria-controls="collapse-{{$data->id}}">
+                    <span class="d-flex">
+                        @if (isset($data->children[0]))
+                            <button style="margin-right: 8px" class="btn btn-sm btn-default" type="button" data-toggle="collapse" data-target="#collapse-{{$data->id}}" aria-expanded="false" aria-controls="collapse-{{$data->id}}">
                                 <i class="voyager-angle-down"></i>
                             </button>
-                        @endisset
+                        @else
+                            <span style="width: 52px;"></span>
+                        @endif
+                        <h4>{!!$data->title!!}</h4>
                     </span>
-                    <div>
+                    <div style="min-width: 184px;">
                         
                         <a href="{{ route('voyager.blocks.create', [ 'parent_id' => $data->id]) }}" class="btn btn-sm btn-success pull-right view add">
-                            <i class="voyager-plus"></i> <span>Добавить</span>
+                            <i class="voyager-plus"></i>
                         </a>
                         @foreach($actions as $action)
                             @if (!method_exists($action, 'massAction'))
@@ -24,7 +45,7 @@
                         @endforeach
                         
                     </div>
-                </li>
+                </div>
                 <ul class="list-group collapse" id="collapse-{{$data->id}}">
                     @if ($data->children)
                         @foreach ($data->children as $item)
@@ -41,9 +62,10 @@
                         @endforeach
                     @endif
                 <ul>
-            </ul>
-        </div>
-    @endforeach
+            </div>
+        @endforeach
+    </div>
+
 </div>
 
 {{-- Single delete modal --}}
