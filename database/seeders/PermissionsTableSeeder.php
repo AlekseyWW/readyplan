@@ -31,6 +31,12 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::generateFor('users');
 
+        Permission::generateFor('blocks');
+        
+        Permission::generateFor('contacts');
+
+        Permission::generateFor('navs');
+
         Permission::generateFor('settings');
     }
 }
