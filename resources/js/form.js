@@ -43,9 +43,15 @@ function addForm(form) {
     
 }
 
+let isLoading = false;
 function handleFormSubmit(event) {
     event.preventDefault();
     event.stopPropagation();
+    console.log({isLoading});
+    if (isLoading) {
+        return false;
+    }
+    isLoading = true;
     const data = serializeForm(event.target);
     const {action, method} = event.target;
     if (!data.name) {
@@ -73,10 +79,13 @@ function handleFormSubmit(event) {
 }
 
 function onFormSuccess(data, form) {
+    isLoading = false;
+
     form.reset();
     toast.success.show('Данные успешно отправлены');
 }
 function onFormError(errors) {
+    isLoading = false;
     Object.keys(errors).map(key => {
         toast.error.show(errors[key]);
     })
