@@ -13,7 +13,7 @@ class PageController extends Controller
     {
         return view('welcome', [
             'blocks' => Block::with('children')->where('parent_id', null)->orderBy('order')->get(),
-            'nav' => Nav::all()
+            'nav' => Nav::orderBy('order')->all()
         ]);
     }
 
