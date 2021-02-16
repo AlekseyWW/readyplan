@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use TCG\Voyager\Facades\Voyager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -32,7 +32,7 @@ class ContactController extends Controller
             {
                 global $request;
                 $message->from('mail@ready-plan.ru');
-                $message->to('nick.maximenko@gmail.com', $request->get('name'))->subject($request->get('subject'));
+                $message->to(Voyager::setting('admin.email'), $request->get('name'))->subject($request->get('subject'));
             }
         );
         return response()->json([
