@@ -31,8 +31,8 @@ class ContactController extends Controller
             ), function($message)
             {
                 global $request;
-                $message->from('mail@ready-plan.ru');
-                $message->to('alekseyvyaznikov@gmail.com', $request->get('name'))->subject($request->get('subject'));
+                $message->from($request->get('email'));
+                $message->to('mail@ready-plan.ru', $request->get('name'))->subject($request->get('subject'));
             }
         );
         return response()->json([
