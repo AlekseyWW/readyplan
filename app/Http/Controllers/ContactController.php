@@ -32,7 +32,7 @@ class ContactController extends Controller
             {
                 global $request;
                 $message->from('mail@ready-plan.ru');
-                $message->to('alekseyvyazikov@gmail.com', $request->get('name'))->subject($request->get('subject'));
+                $message->to('alekseyvyaznikov@gmail.com', $request->get('name'))->subject($request->get('subject'));
             }
         );
         return response()->json([
