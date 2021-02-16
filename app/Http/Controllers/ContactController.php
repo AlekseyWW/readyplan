@@ -32,7 +32,7 @@ class ContactController extends Controller
             {
                 global $request;
                 $message->from('mail@ready-plan.ru');
-                $message->to('alekseyvyaznikov@gmail.com', $request->get('name'))->subject($request->get('subject'));
+                $message->to(Voyager::setting('admin.mail'), $request->get('name'))->subject($request->get('subject'));
             }
         );
         return response()->json([
